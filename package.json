@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-crash-course",
+  "version": "1.0.0",
+  "description": "Node JS tutorial from Traversy Media",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathankong/NodeJS-Crash-Course.git"
+  },
+  "author": "Jonathan Ong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathankong/NodeJS-Crash-Course/issues"
+  },
+  "homepage": "https://github.com/jonathankong/NodeJS-Crash-Course#readme",
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
