@@ -91,7 +91,9 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
 const path = require("path");
+const exphbs = require('express-handlebars');
 const logger = require("./middleware/logger");
+const members = require("./Members");
 
 //Initialize logger middleware
 //app.use(logger);
@@ -101,8 +103,19 @@ const logger = require("./middleware/logger");
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 // })
 
-//Set static folder
-app.use(express.static(path.join(__dirname, "/public")));
+//Init Handlebars Middleware
+app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+// Homepage Route
+app.get('/', (req, res) => res.render('index', {
+    title: 'Member App',
+    members
+}));
+
+//Set static folder (commented out to use handlebars)
+//app.use(express.static(path.join(__dirname, "/public")));
+
 //Use body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -37,6 +37,9 @@ router.post('/', (req, res) => {
     members.push(newMember);
 
     res.json(members);
+    
+    //You would use redirect and not show json normally
+    //res.redirect('/');
 });
 
 //Update member
