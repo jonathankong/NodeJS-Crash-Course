@@ -108,6 +108,7 @@ app.get("/api/members/:id", (req, res) => {
     if (found) {
         res.json(members.filter((member) => member.id === parseInt(req.params.id)));
     } else {
+        //Response 400 means bad request
         res.status(400).json({msg: `No member with ID: ${req.params.id}`});
     }
 });
