@@ -91,27 +91,10 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
 const path = require("path");
-const members = require("./members");
 const logger = require("./middleware/logger");
 
 //Initialize logger middleware
 //app.use(logger);
-
-//Gets all members
-app.get("/api/members", (req, res) => {
-  res.json(members);
-});
-
-//Get single member
-app.get("/api/members/:id", (req, res) => {
-    const found = members.some(member => member.id === parseInt(req.params.id));
-    if (found) {
-        res.json(members.filter((member) => member.id === parseInt(req.params.id)));
-    } else {
-        //Response 400 means bad request
-        res.status(400).json({msg: `No member with ID: ${req.params.id}`});
-    }
-});
 
 //We don't need to do this if we're using a static folder with ExpressJS
 // app.get('/', (req, res) => {
@@ -119,7 +102,12 @@ app.get("/api/members/:id", (req, res) => {
 // })
 
 //Set static folder
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "/public")));
+//Use body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+//Moved routes to another file
+app.use('/api/members', require('./routes/api/members'));
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}...`));
 
